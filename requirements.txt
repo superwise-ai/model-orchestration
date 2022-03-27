@@ -1,0 +1,6 @@
+gunicorn
+flask
+flask-cors
+h5py==2.10.0
+superwise==6.0.10
+google-cloud-storage==2.2.1
