@@ -18,7 +18,7 @@ class DiamondPricePredictor(object):
         self._model = self._set_model(model_gcs_path)
         self._sw = Superwise(
             client_id=os.getenv("SUPERWISE_CLIENT_ID"),
-            secret=os.getenv("SUPERWISE_SECRET"),
+            secret=os.getenv("SUPERWISE_SECRET")
         )
 
     def _send_monitor_data(self, predictions):
@@ -72,5 +72,5 @@ class DiamondPricePredictor(object):
             temp_file.seek(0)
             # load into joblib
             model = joblib.load(temp_file)
-
+        print(f"Finished loading model from GCS")
         return model
