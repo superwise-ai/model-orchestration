@@ -15,14 +15,16 @@ SUPERWISE_VERSION_ID = os.getenv("SUPERWISE_VERSION_ID")
 
 class DiamondPricePredictor(object):
     def __init__(self, model_gcs_path):
-        self._model = self._set_model(model_gcs_path)
+        """
+        The constructor method should do the following:
+            1 - Set the sklearn model
+            2 - Define Superwise driver for logging the predictions
+        """
+        ### TODO Workshop: Complete Here
+        pass 
 
     def _send_monitor_data(self, predictions):
-        sw = Superwise(
-            client_id=os.getenv("SUPERWISE_CLIENT_ID"),
-            secret=os.getenv("SUPERWISE_SECRET"),
-        )
-        transaction_id = sw.transaction.log_records(
+        transaction_id = self._sw.transaction.log_records(
             model_id=os.getenv("SUPERWISE_MODEL_ID"),
             version_id=os.getenv("SUPERWISE_VERSION_ID"),
             records=predictions,
@@ -30,10 +32,19 @@ class DiamondPricePredictor(object):
         return transaction_id
 
     def predict(self, instances, **kwargs):
-        input_df = pd.DataFrame(instances)
-        # Add timestamp to prediction
-        input_df["predictions"] = self._model.predict(input_df)
-        input_df["ts"] = pd.Timestamp.now()
+        """
+            Pseudo:
+                - read instances into DataFrame
+                - use the dataframe to predict values
+                - send the prediction and data to Superwise using
+                self._send_monitor_data(x)
+                - create an output contains of the whole Dataframe and
+                transaction_id
+        """ 
+        ### TODO Workshop: Complete HERE
+
+
+        ###############################
         # Send data to Superwise
         transaction_id = self._send_monitor_data(input_df)
         api_output = {
@@ -43,17 +54,13 @@ class DiamondPricePredictor(object):
         return api_output
 
     def _set_model(self, model_gcs_path):
-        storage_client = storage.Client()
-        bucket_name = os.environ["BUCKET_NAME"]
-        print(f"Loading from bucket {bucket_name} model {model_gcs_path}")
-        bucket = storage_client.get_bucket(bucket_name)
-        # select bucket file
-        blob = bucket.blob(model_gcs_path)
-        with TemporaryFile() as temp_file:
-            # download blob into temp file
-            blob.download_to_file(temp_file)
-            temp_file.seek(0)
-            # load into joblib
-            model = joblib.load(temp_file)
+        """
+        This function read a file from GCS, unserialze it using joblib and
+        returns sklearn-pipeline ready for predictions
 
+        @params:
+            - path to GCS joblib file
+        RETURNS: Pipeline ready for predictions
+        """
+        ## TODO Workshop: COMPLETE_HERE
         return model

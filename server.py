@@ -9,12 +9,28 @@ app = Flask("DiamondPricePredictor")
 gunicorn_logger = logging.getLogger("gunicorn.error")
 app.logger.handlers = gunicorn_logger.handlers
 app.logger.setLevel(gunicorn_logger.level)
-predictor = DiamondPricePredictor(os.environ["MODEL_PATH"])
+## TODO Workshop: complete
+# predictor = DiamondPricePredictor(<COMPLETE HERE>)
 
 
 @app.route("/diamonds/v1/predict", methods=["POST"])
 def predict():
-    predictions = predictor.predict(request.json["instances"])
+    """
+    Handle the Endpoint predict request.
+    request.json - expected in the following format:
+        {
+            "instances": [
+            {
+                "carat" : 1.42, "clarity" : "VVS1", "color" : "F", "cut" : "Ideal", "depth" : 60.8, "record_id" : 27671, "table" : 56, "x" : 7.25, "y" : 7.32, "z" : 4.43
+            },
+            {
+                "carat" : 2.03, "clarity" : "VS2", "color" : "G", "cut" : "Premium", "depth" : 59.6, "record_id" : 27670, "table" : 60, "x" : 8.27, "y" : 8.21, "z" : 4.91
+            }
+            ]
+        }
+    """
+    ## TODO Workshop: Complete here
+    
     return jsonify(
         {
             "predictions": predictions["predicted_prices"],
