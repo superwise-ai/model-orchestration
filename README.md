@@ -1,12 +1,12 @@
-# SKLean Model Orchestration
+# SKLearn Model Orchestration
 Basic Flask App that demonstrates how to deploy sklearn model and log predictions into Superwise's platform
 
 ***
 
 <p align="center" width="100%">
-<b>THIS IS FOR DEMONSTRATION PURPOSE ONLY</b>
+<b>🚧 THIS IS FOR DEMONSTRATION PURPOSE ONLY 🚧</b>
 <p align="center" width="100%">
-<b>DO NOT USE IT IN PRODUCTION</b>
+<b>🚧 DO NOT USE IT IN PRODUCTION 🚧</b>
 
 ***
 # Usage
