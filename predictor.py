@@ -29,8 +29,8 @@ class DiamondPricePredictor(object):
         :return str transaction_id
         """
         transaction_id = self._sw.transaction.log_records(
-            model_id=os.getenv("SUPERWISE_MODEL_ID"),
-            version_id=os.getenv("SUPERWISE_VERSION_ID"),
+            model_id=int(os.getenv("SUPERWISE_MODEL_ID")),
+            version_id=int(os.getenv("SUPERWISE_VERSION_ID")),
             records=predictions
         )
         return transaction_id
