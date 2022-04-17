@@ -3,7 +3,7 @@ import os
 
 from flask import Flask, jsonify, request
 
-from predictor import DiamondPricePredictor
+from predictor.predictor import DiamondPricePredictor
 
 app = Flask("DiamondPricePredictor")
 gunicorn_logger = logging.getLogger("gunicorn.error")
