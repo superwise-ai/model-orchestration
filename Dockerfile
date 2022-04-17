@@ -22,6 +22,6 @@ ENV SUPERWISE_VERSION_ID=${SUPERWISE_VERSION_ID}
 ENV FLASK_APP /app/server.py
 ENV GOOGLE_APPLICATION_CREDENTIALS /app/resources/creds.json
 
-ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:5050", "server:app", "--timeout", "1000", "-w", "4"]
+ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:5050", "predictor.server:app", "--timeout", "1000", "-w", "4"]
 
 EXPOSE 5050

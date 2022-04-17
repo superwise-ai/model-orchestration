@@ -35,24 +35,6 @@ class DiamondPricePredictor(object):
         )
         return transaction_id
 
-    def predict(self, instances):
-        """
-        apply predictions on instances and log predictions to Superwise
-
-        :param list instances: [{record1}, {record2} ... {record-N}]
-        :return dict api_output: {[predicted_prices: prediction, transaction_id: str]}
-        """
-        input_df = pd.DataFrame(instances)
-        # Add timestamp to prediction
-        input_df["predictions"] = self._model.predict(input_df)
-        # Send data to Superwise
-        transaction_id = self._send_monitor_data(input_df)
-        api_output = {
-            "transaction_id": transaction_id,
-            "predicted_prices": input_df["predictions"].values.tolist(),
-        }
-        return api_output
-
     def _set_model(self, model_gcs_path):
         """
         download file from gcs to temp file and deserialize it to sklearn object
@@ -74,3 +56,21 @@ class DiamondPricePredictor(object):
             model = joblib.load(temp_file)
         print(f"Finished loading model from GCS")
         return model
+
+    def predict(self, instances):
+        """
+        apply predictions on instances and log predictions to Superwise
+
+        :param list instances: [{record1}, {record2} ... {record-N}]
+        :return dict api_output: {[predicted_prices: prediction, transaction_id: str]}
+        """
+        input_df = pd.DataFrame(instances)
+        # Add timestamp to prediction
+        input_df["predictions"] = self._model.predict(input_df)
+        # Send data to Superwise
+        transaction_id = self._send_monitor_data(input_df)
+        api_output = {
+            "transaction_id": transaction_id,
+            "predicted_prices": input_df["predictions"].values.tolist(),
+        }
+        return api_output
