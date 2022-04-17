@@ -28,13 +28,7 @@ def predict():
             ]
         }
     """
-    predictions = predictor.predict(request.json["instances"])
-    return jsonify(
-        {
-            "predictions": predictions["predicted_prices"],
-            "transaction_id": predictions["transaction_id"],
-        }
-    )
+    pass
 
 
 @app.route("/diamonds/v1", methods=["GET"])
@@ -44,9 +38,7 @@ def healthcheck():
     HTTP server while it is running to ensure that it is
     ready to handle prediction requests.
     """
-    resp = jsonify(health="Diamonds Prediction Service is Alive!")
-    resp.status_code = 200
-    return resp
+    pass
 
 
 if __name__ == "__main__":

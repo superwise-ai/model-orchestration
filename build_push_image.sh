@@ -1,9 +1,9 @@
 #!/bin/zsh
 
-REPOSITORY='<GCP Artifactory Registry Repo Name>'
-PROJECT_ID='<GCP Project Id>'
-REGION='<GCP Region>'
-IMAGE='<Image Name>'
+REPOSITORY='diamonds-predictor-repo'
+PROJECT_ID='workshop-347112'
+REGION='us-central1'
+IMAGE='diamonds_predictor'
 
 docker build --tag=${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE} .
 docker push ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}
